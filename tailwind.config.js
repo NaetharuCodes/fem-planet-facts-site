@@ -2,7 +2,12 @@
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        spartan: ["Spartan", "sans-serif"],
+        antonio: ["Antonio", "sans-serif"],
+      },
+    },
     colors: {
       white: "#ffffff",
       black: "#070724",
