@@ -1,40 +1,36 @@
 import React, { useState } from "react";
+import { backgroundColorClassMap, BgColor } from "../helpers/styleClassMaps";
 
 interface MenuItemProps {
   name: string;
-  color: string;
+  color: BgColor;
 }
 
 const MenuItem = ({ name, color }: MenuItemProps) => {
+  const bgColorClass = backgroundColorClassMap[color];
+
   return (
     <a
       href={`./planet/${name}`}
       className="h-20 border-b border-darkGray flex items-center bg-black text-white font-spartan font-bold uppercase text-[15pt]"
     >
-      <div className={`rounded-full ${color} w-6 h-6 mx-8`} />
+      <div className={`rounded-full ${bgColorClass} w-6 h-6 mx-8`} />
       <p>{name}</p>
     </a>
   );
 };
 
-const menuItems = [
-  { name: "mercury", color: "bg-white" },
-  { name: "venus", color: "bg-yellow" },
-  { name: "earth", color: "bg-darkBlue" },
-  { name: "mars", color: "bg-red" },
-  { name: "jupiter", color: "bg-lightOrange" },
-  { name: "saturn", color: "bg-yellow" },
-  { name: "uranus", color: "bg-green" },
-  { name: "neptune", color: "bg-lightBlue" },
-];
+interface BurgerMenuProps {
+  menuItems: MenuItemProps[];
+}
 
-const BurgerMenu = () => {
+const BurgerMenu = ({ menuItems }: BurgerMenuProps) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="relative">
+    <div className="relative md:hidden">
       {/* Burger Icon */}
       <button
-        className="flex items-center px-3 py-2 rounded text-white  lg:hidden"
+        className="flex items-center px-3 py-2 rounded text-white md:hidden"
         onClick={() => setIsOpen(!isOpen)}
       >
         <svg
