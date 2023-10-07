@@ -7,3 +7,4 @@ This is a Front End Mentor challenge [Front End Mentor](https://www.frontendment
 - React
 - Create React App
 - Tailwind CSS
+- React Router v6

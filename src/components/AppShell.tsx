@@ -6,6 +6,7 @@ import {
   BdColor,
   borderColorClassMap,
 } from "../helpers/styleClassMaps";
+import { Link } from "react-router-dom";
 
 interface planetListType {
   name: string;
@@ -38,9 +39,9 @@ const PlanetBar = ({ planetList }: PlanetBarProps) => {
             key={planet.name}
             className={`border-t-4 border-trans ${bdColorClass} h-full flex items-center w-24 justify-center`}
           >
-            <a href={`./planets/${planet.name}`} className="text-white mx-7">
+            <Link to={`/planets/${planet.name}`} className="text-white mx-7">
               {planet.name}
-            </a>
+            </Link>
           </div>
         );
       })}
@@ -48,7 +49,11 @@ const PlanetBar = ({ planetList }: PlanetBarProps) => {
   );
 };
 
-const AppShell = () => {
+interface AppShellProps {
+  children: React.ReactNode;
+}
+
+const AppShell = ({ children }: AppShellProps) => {
   return (
     <div className="h-screen flex flex-col bg-black">
       <header className="border-b border-darkGray min-h-[68px] flex flex-row md:flex-col lg:flex-row justify-between items-center px-[24px] bg-black">
@@ -58,6 +63,7 @@ const AppShell = () => {
         <PlanetBar planetList={planetList} />
         <BurgerMenu menuItems={planetList} />
       </header>
+      {children}
     </div>
   );
 };
