@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { backgroundColorClassMap, BgColor } from "../helpers/styleClassMaps";
+import { Link } from "react-router-dom";
 
 interface MenuItemProps {
   name: string;
@@ -10,13 +11,13 @@ const MenuItem = ({ name, color }: MenuItemProps) => {
   const bgColorClass = backgroundColorClassMap[color];
 
   return (
-    <a
-      href={`./planet/${name}`}
+    <Link
+      to={`/planets/${name}`}
       className="h-20 border-b border-darkGray flex items-center bg-black text-white font-spartan font-bold uppercase text-[15pt]"
     >
       <div className={`rounded-full ${bgColorClass} w-6 h-6 mx-8`} />
       <p>{name}</p>
-    </a>
+    </Link>
   );
 };
 
