@@ -55,7 +55,7 @@ interface AppShellProps {
 
 const AppShell = ({ children }: AppShellProps) => {
   return (
-    <div className="h-screen flex flex-col bg-black">
+    <div className="min-h-screen flex flex-col bg-black">
       <header className="border-b border-darkGray min-h-[68px] flex flex-row md:flex-col lg:flex-row justify-between items-center px-[24px] bg-black">
         <h1 className="font-antonio text-white text-[28px] line-[52px] uppercase">
           The Planets
