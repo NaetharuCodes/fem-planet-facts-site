@@ -5,13 +5,15 @@ import { Link } from "react-router-dom";
 interface MenuItemProps {
   name: string;
   color: BgColor;
+  setIsOpen: (open:boolean) => void;
 }
 
-const MenuItem = ({ name, color }: MenuItemProps) => {
+const MenuItem = ({ name, color, setIsOpen }: MenuItemProps) => {
   const bgColorClass = backgroundColorClassMap[color];
 
   return (
     <Link
+      onClick={() => setIsOpen(false)}
       to={`/planets/${name}`}
       className="h-20 border-b border-darkGray flex items-center bg-black text-white font-spartan font-bold uppercase text-[15pt]"
     >
@@ -22,7 +24,7 @@ const MenuItem = ({ name, color }: MenuItemProps) => {
 };
 
 interface BurgerMenuProps {
-  menuItems: MenuItemProps[];
+  menuItems: {name: string, color: BgColor}[]
 }
 
 const BurgerMenu = ({ menuItems }: BurgerMenuProps) => {
@@ -63,7 +65,7 @@ const BurgerMenu = ({ menuItems }: BurgerMenuProps) => {
       {isOpen && (
         <div className="fixed left-0 top-[68px] w-screen bg-white">
           {menuItems.map((item) => (
-            <MenuItem key={item.name} name={item.name} color={item.color} />
+            <MenuItem setIsOpen={setIsOpen} key={item.name} name={item.name} color={item.color} />
           ))}
         </div>
       )}
