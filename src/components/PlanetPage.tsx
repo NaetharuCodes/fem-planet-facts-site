@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { views } from "../helpers/enums";
 import planetMars from "./../assets/planet-mars.svg";
 import { BgColor, backgroundColorClassMap } from "../helpers/styleClassMaps";
+import { useParams } from "react-router-dom";
 
 interface MenuBtnProps {
   name: string;
@@ -55,13 +56,17 @@ const InfoBox = ({ label, number, units }: InfoBoxProps) => {
 };
 
 const PlanetPage = () => {
+  //
   const [view, setView] = useState<views>(views.OVERVIEW);
   const [planet, setPlanet] = useState<Planet | null>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Grabs the current page's planet name used for the API fetch
+  const { planetName } = useParams();
+
   useEffect(() => {
-    fetch("http://localhost:5275/api/planets/1")
+    fetch(`http://localhost:5275/api/planets/${planetName}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -76,10 +81,7 @@ const PlanetPage = () => {
         setError(error);
         setLoading(false);
       });
-  }, [view]);
-
-  console.log("PLANET: ", planet);
-  console.log("PLANET NAME: ", planet?.name);
+  }, [planetName]);
 
   if (!planet) return <div>Loading...</div>;
 
