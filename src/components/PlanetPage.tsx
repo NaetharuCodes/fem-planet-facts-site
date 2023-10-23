@@ -3,6 +3,7 @@ import { views } from "../helpers/enums";
 import planetMars from "./../assets/planet-mars.svg";
 import { BgColor, backgroundColorClassMap } from "../helpers/styleClassMaps";
 import { useParams } from "react-router-dom";
+import Button from "./Button";
 
 interface MenuBtnProps {
   name: string;
@@ -19,23 +20,6 @@ export type Planet = {
   radius: number;
   revolutionTime: number;
   temperature: number;
-};
-
-const MenuBtn = ({ name, onClick, color }: MenuBtnProps) => {
-  const buttonBackgroundColor = backgroundColorClassMap[color];
-
-  return (
-    <li
-      className={`h-full flex items-center sm:w-full sm:justify-center border border-lightGray m-2 sm:h-12 ${buttonBackgroundColor}`}
-    >
-      <button
-        className="w-[100px] h-10 uppercase sm:border-l-lightGray"
-        onClick={onClick}
-      >
-        {name}
-      </button>
-    </li>
-  );
 };
 
 interface InfoBoxProps {
@@ -86,54 +70,32 @@ const PlanetPage = () => {
   if (!planet) return <div>Loading...</div>;
 
   return (
-    <div className="text-white bg-black flex flex-col items-center min-h-full mx-10">
-      <ul className="flex justify-between items-center w-screen px-10 border-b border-darkGray bg-black h-14 sm:hidden">
-        <MenuBtn
-          color={"darkOrange"}
-          name="overview"
-          onClick={() => setView(views.OVERVIEW)}
-        />
-        <MenuBtn
-          color={"darkOrange"}
-          name="structure"
-          onClick={() => setView(views.STRUCTURE)}
-        />
-        <MenuBtn
-          color={"darkOrange"}
-          name="surface"
-          onClick={() => setView(views.SURFACE)}
-        />
+    <div className="text-white bg-black flex flex-col justify-between items-center min-h-full mx-10 flex-1">
+      <ul className="flex md:hidden">
+        <Button name="overview" onClick={() => setView(views.OVERVIEW)} />
+        <Button name="structure" onClick={() => setView(views.STRUCTURE)} />
+        <Button name="surface" onClick={() => setView(views.SURFACE)} />
       </ul>
       <img src={planetMars} alt="planet" className="my-20 w-40" />
-      <div className="sm:flex">
-        <div className="sm:w-1/2">
-          <h2 className="uppercase text-[40pt] font-antonio ">{planet.name}</h2>
-          <p className="font-spartan text-[10pt] text-center mt-10 white sm:text-start">
+      <div className="sm:flex w-full">
+        <div className="md:w-1/2">
+          <h2 className="uppercase text-[40pt] font-antonio text-center md:text-left">
+            {planet.name}
+          </h2>
+          <p className="font-spartan text-[10pt] mt-10 white text-center md:text-left">
             {planet.description}
           </p>
-          <div className="my-10">
+          <div className="my-10 text-center md:text-left">
             Source: <a href="#">Wikipedia</a>
           </div>
         </div>
-        <ul className="hidden sm:flex flex-col width-1/2 items-center justify-center flex-1 pl-10">
-          <MenuBtn
-            color={"darkOrange"}
-            name="overview"
-            onClick={() => setView(views.OVERVIEW)}
-          />
-          <MenuBtn
-            color={"darkOrange"}
-            name="structure"
-            onClick={() => setView(views.STRUCTURE)}
-          />
-          <MenuBtn
-            color={"darkOrange"}
-            name="surface"
-            onClick={() => setView(views.SURFACE)}
-          />
+        <ul className="hidden md:flex flex-col w-1/2 items-center justify-center flex-1 pl-10">
+          <Button name="overview" onClick={() => setView(views.OVERVIEW)} />
+          <Button name="structure" onClick={() => setView(views.STRUCTURE)} />
+          <Button name="surface" onClick={() => setView(views.SURFACE)} />
         </ul>
       </div>
-      <div className="w-full sm:flex">
+      <div className="w-full md:flex mb-6">
         <InfoBox
           label="rotation time"
           number={planet.rotationTime}
