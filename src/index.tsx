@@ -2,9 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  redirect,
+} from "react-router-dom";
 import ErrorPage from "./components/ErrorPage";
 import PlanetPage from "./components/PlanetPage";
+import DefaultRedirect from "./components/DefaultRedirect";
 
 const router = createBrowserRouter([
   {
@@ -12,6 +17,10 @@ const router = createBrowserRouter([
     element: <App />,
     errorElement: <ErrorPage />,
     children: [
+      {
+        path: "/",
+        element: <DefaultRedirect />,
+      },
       {
         path: "planets/:planetName",
         element: <PlanetPage />,
